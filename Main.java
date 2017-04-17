@@ -6,7 +6,7 @@ public class Main {
 	void ReadMDFile(){
 	;
     }
-	void SearchMDFile(){
+	void SearchImagesInMDFile(){
 	;
 	}
 	void EditMDFile(){
