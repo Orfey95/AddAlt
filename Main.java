@@ -3,16 +3,17 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 public class Main {
 
-    static  String workFile;
+     static List<String> workFile;
     public static void main(String[] args) throws IOException {
 
         ReadMDFile();
-        System.out.println(workFile);
+        System.out.println(workFile.get(20));
+        SaveMDFile();
     }
 
    static void ReadMDFile()throws IOException {
         String fileName = "src\\testFile.md";
-       workFile = new String(Files.readAllBytes(Paths.get(fileName)));
+       workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
     }
 	void SearchImagesInMDFile(){
 	;
@@ -20,7 +21,7 @@ public class Main {
 	void EditMDFile(){
 	;
 	}
-	void SaveMDFile(){
-	    ;
-	}
+	  static void SaveMDFile() throws IOException {
+        Files.write(Paths.get("src\\out.md"), workFile);
+    }
 }
