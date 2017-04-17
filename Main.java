@@ -1,10 +1,15 @@
 public class Main {
 
-    public static void main(String[] args) {
-	// write your code here
+    static  String workFile;
+    public static void main(String[] args) throws IOException {
+
+        ReadMDFile();
+        System.out.println(workFile);
     }
-	void ReadMDFile(){
-	;
+
+   static void ReadMDFile()throws IOException {
+        String fileName = "src\\testFile.md";
+       workFile = new String(Files.readAllBytes(Paths.get(fileName)));
     }
 	void SearchImagesInMDFile(){
 	;
