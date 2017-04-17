@@ -14,12 +14,7 @@ public class Main {
         ReadMDFile();
         //System.out.println(workFile.get(20));
         SearchImagesInMDFile();
-        //SaveMDFile();
-        /*String x = "![Image]({{ site.url }}{% link /assets/images/how-to/search-project-gerrit.png %})";
-        if (CheckStr(x)){
-            System.out.println("+");
-        }*/
-
+        //SaveMDFile(); 
     }
 
     static void ReadMDFile()throws IOException {
