@@ -9,13 +9,19 @@ import java.util.List;
 public class Main {
 
     static List<String> workFile;
+    static int numberString = -1;
     public static void main(String[] args) throws IOException {
         //ReadMDFile();
         //SearchImagesInMDFile();
         //EditMDFile(SearchImagesInMDFile());
+        ReplaceStringInList();
         //SaveMDFile();
     }
-
+ static void ReplaceStringInList(){
+        String tempStr;
+        tempStr = EditMDFile(SearchImagesInMDFile());
+        workFile.set(numberString,tempStr);
+    }
     static void ReadMDFile()throws IOException {
         String fileName = "src\\testFile.md";
         workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
@@ -23,9 +29,10 @@ public class Main {
     static String SearchImagesInMDFile(){
         String currentStr = "";
         String strImg = "";
-        for (int i = 0; i < workFile.size(); i++){
+         for (int i = numberString + 1; i < workFile.size(); i++){
             currentStr = workFile.get(i);
             if (CheckStr(currentStr)){
+                numberString = i;
                 strImg = currentStr;
                 System.out.println(strImg);
                 return strImg;
