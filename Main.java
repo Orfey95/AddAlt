@@ -40,7 +40,7 @@ public class Main {
         return m.matches();
     }
 
-    void EditMDFile(){
+    static String EditMDFile(String tempStr){
         Pattern p = Pattern.compile("\\!\\[(.+)\\](.+)");
         Matcher m = p.matcher(tempStr);
         if (m.matches()) {
@@ -66,6 +66,7 @@ public class Main {
         if(m.group(1) != a) {
             tempStr = tempStr.replaceAll(m.group(1), a);
         }
+        return tempStr;
     }
 
     static void SaveMDFile() throws IOException {
