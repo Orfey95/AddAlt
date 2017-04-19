@@ -63,7 +63,7 @@ public class Main {
         } else {
             System.out.println("Error");
         }
-        if(m.group(1) != a) {
+        if(m.group(1).compareTo(a) != 0) {
             tempStr = tempStr.replaceAll(m.group(1), a);
         }
         return tempStr;
