@@ -48,7 +48,7 @@ public class Main {
     }
 
     static String EditMDFile(String tempStr){
-        Pattern p = Pattern.compile("\\!\\[(.+)\\](.+)");
+        Pattern p = Pattern.compile("\\s*\\!\\[(.+)\\](.+)");
         Matcher m = p.matcher(tempStr);
         if (m.matches()) {
             System.out.println(m.group(1));
