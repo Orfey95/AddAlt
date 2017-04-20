@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -6,15 +7,45 @@ import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Main {
 
-  static List<String> workFile;
-  static int numberString = -1;
+    static List<String> workFile;
+    static int numberString = -1;
     public static void main(String[] args) throws IOException {
-        ReadMDFile();
-        for(int i = numberString + 1; i<workFile.size(); i++)
-            ReplaceStringInList();
-        SaveMDFile();
+        processFilesFromFolder(new File("C:\\master1"));
+
+    }
+    static void processFilesFromFolder(File folder) throws IOException{
+        File[] folderEntries = folder.listFiles();
+        for (File entry : folderEntries)
+        {
+            if (entry.isDirectory())
+            {
+                processFilesFromFolder(entry);
+                continue;
+            }
+ 
+            if (getFileExtension(entry).compareTo("md") == 0) {
+                System.out.println(entry.getPath());
+                ReadMDFile(entry.getPath());
+                for (int i = numberString + 1; i < workFile.size(); i++)
+                    ReplaceStringInList();
+                SaveMDFile(entry.getPath());
+                numberString = -1;
+                workFile.clear();
+            }
+        }
+    }
+
+private static String getFileExtension(File file) {
+    String fileName = file.getName();
+    // если в имени файла есть точка и она не является первым символом в названии файла
+    if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+    // то вырезаем все знаки после последней точки в названии файла, то есть ХХХХХ.txt -> txt
+    return fileName.substring(fileName.lastIndexOf(".")+1);
+    // в противном случае возвращаем заглушку, то есть расширение не найдено
+    else return "";
     }
 
     static void ReplaceStringInList(){
@@ -25,9 +56,8 @@ public class Main {
             workFile.set(numberString, tempStr);
         }
     }
-   static void ReadMDFile()throws IOException {
-        String fileName = "src\\testFile.md";
-       workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
+    static void ReadMDFile(String fileName)throws IOException {
+        workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
     }
 
     static String SearchImagesInMDFile(){
@@ -79,8 +109,8 @@ public class Main {
         return tegStr;
     }
 
-    static void SaveMDFile() throws IOException {
-        Files.write(Paths.get("src\\out.md"), workFile);
+    static void SaveMDFile(String path) throws IOException {
+        Files.write(Paths.get(path), workFile);
     }
 
 }
