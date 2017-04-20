@@ -51,31 +51,31 @@ public class Main {
         return m.matches();
     }
 
-    static String EditMDFile(String tempStr){
+    static String EditMDFile(String tegStr){
         Pattern p = Pattern.compile("\\s*\\!\\[(.+)\\](.+)");
-        Matcher m = p.matcher(tempStr);
+        Matcher m = p.matcher(tegStr);
         if (m.matches()) {
             System.out.println(m.group(1));
         } else {
-            System.out.println("Error");
+            System.out.println("Error with first matcher");
         }
 
         Pattern p1 = Pattern.compile("(\\/).+(\\.)");
-        Matcher m1 = p1.matcher(tempStr);
-        String a = "";
+        Matcher m1 = p1.matcher(tegStr);
+        String wordImg = "";
         if(m1.find()){
-            a = m1.group();
-            a = a.substring(0, a.length()-1);
-            String[] am = a.split("/");
-            a = am[am.length-1];
-            a = a.replace('-', ' ');
-            a = a.substring(0, 1).toUpperCase() + a.substring(1);
-            System.out.println(a);
+            wordImg = m1.group();
+            wordImg = wordImg.substring(0, wordImg.length()-1);
+            String[] am = wordImg.split("/");
+            wordImg = am[am.length-1];
+            wordImg = wordImg.replace('-', ' ');
+            wordImg = wordImg.substring(0, 1).toUpperCase() + wordImg.substring(1);
+            System.out.println(wordImg);
         } else {
-            System.out.println("Error");
+            System.out.println("Error with second matcher");
         }
-            tempStr = tempStr.replaceAll(m.group(1), a);
-        return tempStr;
+        tegStr = tegStr.replaceAll(m.group(1), wordImg);
+        return tegStr;
     }
 
     static void SaveMDFile() throws IOException {
