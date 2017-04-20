@@ -8,27 +8,32 @@ import java.util.List;
 
 public class Main {
 
-    static List<String> workFile;
-    static int numberString = -1;
+  static List<String> workFile;
+  static int numberString = -1;
     public static void main(String[] args) throws IOException {
         ReadMDFile();
         for(int i = numberString + 1; i<workFile.size(); i++)
             ReplaceStringInList();
         SaveMDFile();
     }
- static void ReplaceStringInList(){
+
+    static void ReplaceStringInList(){
         String tempStr;
-        tempStr = EditMDFile(SearchImagesInMDFile());
-        workFile.set(numberString,tempStr);
+        tempStr = SearchImagesInMDFile();
+        if(tempStr.compareTo("0") != 0) {
+            tempStr = EditMDFile(tempStr);
+            workFile.set(numberString, tempStr);
+        }
     }
-    static void ReadMDFile()throws IOException {
+   static void ReadMDFile()throws IOException {
         String fileName = "src\\testFile.md";
-        workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
+       workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
     }
+
     static String SearchImagesInMDFile(){
         String currentStr = "";
         String strImg = "";
-         for (int i = numberString + 1; i < workFile.size(); i++){
+        for (int i = numberString + 1; i < workFile.size(); i++){
             currentStr = workFile.get(i);
             if (CheckStr(currentStr)){
                 numberString = i;
@@ -69,13 +74,12 @@ public class Main {
         } else {
             System.out.println("Error");
         }
-        if(m.group(1).compareTo(a) != 0) {
             tempStr = tempStr.replaceAll(m.group(1), a);
-        }
         return tempStr;
     }
 
     static void SaveMDFile() throws IOException {
         Files.write(Paths.get("src\\out.md"), workFile);
     }
+
 }
