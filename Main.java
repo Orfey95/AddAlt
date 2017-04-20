@@ -13,7 +13,17 @@ public class Main {
     static List<String> workFile;
     static int numberString = -1;
     public static void main(String[] args) throws IOException {
-        processFilesFromFolder(new File("C:\\master1"));
+        String userStr = "C:\\master1\\_posts\\2017-02-20-how-to-work-with-gerrit-in-cicsnkhaiedu.md";
+        File userFile = new File(userStr);
+        if(getFileExtension(userFile).compareTo("md") == 0){
+            ReadMDFile(userStr);
+            for (int i = numberString + 1; i < workFile.size(); i++)
+                ReplaceStringInList();
+            SaveMDFile(userStr);
+        }
+        if(getFileExtension(userFile).compareTo("") == 0)
+        processFilesFromFolder(userFile);
+
 
     }
     static void processFilesFromFolder(File folder) throws IOException{
