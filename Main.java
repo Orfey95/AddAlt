@@ -13,18 +13,26 @@ public class Main {
     static List<String> workFile;
     static int numberString = -1;
     public static void main(String[] args) throws IOException {
-        String userStr = "C:\\master1\\_posts\\2017-02-20-how-to-work-with-gerrit-in-cicsnkhaiedu.md";
-        File userFile = new File(userStr);
-        if(getFileExtension(userFile).compareTo("md") == 0){
-            ReadMDFile(userStr);
-            for (int i = numberString + 1; i < workFile.size(); i++)
-                ReplaceStringInList();
-            SaveMDFile(userStr);
+        while (true) {
+            Scanner scannerDir = new Scanner(System.in);
+            System.out.println("Input directory or file name(.md) or input exit for close program:");
+            String dirOrFile = scannerDir.next();
+            if(dirOrFile.compareTo("exit") == 0 || dirOrFile.compareTo("Exit") == 0 || dirOrFile.compareTo("EXIT") == 0)
+                break;
+            File userFile = new File(dirOrFile);
+            if (getFileExtension(userFile).compareTo("md") != 0 && getFileExtension(userFile).compareTo("") != 0) {
+                System.out.println("Incorrect input");
+            }
+            if (getFileExtension(userFile).compareTo("md") == 0) {
+                ReadMDFile(dirOrFile);
+                for (int i = numberString + 1; i < workFile.size(); i++)
+                    ReplaceStringInList();
+                SaveMDFile(dirOrFile);
+            }
+            if (getFileExtension(userFile).compareTo("") == 0) {
+                processFilesFromFolder(userFile);
+            }
         }
-        if(getFileExtension(userFile).compareTo("") == 0)
-        processFilesFromFolder(userFile);
-
-
     }
     static void processFilesFromFolder(File folder) throws IOException{
         File[] folderEntries = folder.listFiles();
