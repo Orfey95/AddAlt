@@ -69,6 +69,7 @@ public class Main {
             String[] masWithSplit = wordImg.split("/");
             wordImg = masWithSplit[masWithSplit.length-1];
             wordImg = wordImg.replace('-', ' ');
+            wordImg = wordImg.replace('_', ' ');
             wordImg = wordImg.substring(0, 1).toUpperCase() + wordImg.substring(1);
             System.out.println(wordImg);
         } else {
