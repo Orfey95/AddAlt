@@ -66,8 +66,8 @@ public class Main {
         if(m1.find()){
             wordImg = m1.group();
             wordImg = wordImg.substring(0, wordImg.length()-1);
-            String[] am = wordImg.split("/");
-            wordImg = am[am.length-1];
+            String[] masWithSplit = wordImg.split("/");
+            wordImg = masWithSplit[masWithSplit.length-1];
             wordImg = wordImg.replace('-', ' ');
             wordImg = wordImg.substring(0, 1).toUpperCase() + wordImg.substring(1);
             System.out.println(wordImg);
