@@ -11,11 +11,10 @@ public class Main {
     static List<String> workFile;
     static int numberString = -1;
     public static void main(String[] args) throws IOException {
-        //ReadMDFile();
-        //SearchImagesInMDFile();
-        //EditMDFile(SearchImagesInMDFile());
-        ReplaceStringInList();
-        //SaveMDFile();
+        ReadMDFile();
+        for(int i = numberString + 1; i<workFile.size(); i++)
+            ReplaceStringInList();
+        SaveMDFile();
     }
  static void ReplaceStringInList(){
         String tempStr;
