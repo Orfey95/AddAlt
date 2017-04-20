@@ -8,13 +8,12 @@ import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Main {
 
     static List<String> workFile;
     static int numberString = -1;
     
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         while (true) {
             try {
                 Scanner scannerDir = new Scanner(System.in);
@@ -41,6 +40,7 @@ public class Main {
             }            
         }
     }
+    
     static void processFilesFromFolder(File folder) throws IOException{
         File[] folderEntries = folder.listFiles();
         for (File entry : folderEntries)
@@ -81,6 +81,7 @@ private static String getFileExtension(File file) {
             workFile.set(numberString, tempStr);
         }
     }
+    
     static void ReadMDFile(String fileName)throws IOException {
         workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
     }
