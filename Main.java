@@ -16,6 +16,7 @@ public class Main {
     public static void main(String[] args) {
         while (true) {
             try {
+                countCreatAlt = 0;
                 Scanner scannerDir = new Scanner(System.in);
                 System.out.println("Input directory or file name(.md) or input exit for close program:");
                 String dirOrFile = scannerDir.next();
@@ -30,14 +31,16 @@ public class Main {
                     for (int i = numberString + 1; i < workFile.size(); i++)
                         ReplaceStringInList();
                     SaveMDFile(dirOrFile);
+                    System.out.println("Changed Alts: " + countCreatAlt);
                 }
                 if (getFileExtension(userFile).compareTo("") == 0) {
                     processFilesFromFolder(userFile);
+                    System.out.println("Changed Alts: " + countCreatAlt);
                 }
             }
             catch (Exception e){
                 System.out.println("Incorrect input");
-            }            
+            }
         }
     }
     
