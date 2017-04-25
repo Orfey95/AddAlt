@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-
+    
     static List<String> workFile;
     static int numberString = -1;
-    
+    static int countCreatAlt = 0;
     public static void main(String[] args) {
         while (true) {
             try {
@@ -23,9 +23,9 @@ public class Main {
                 if (dirOrFile.compareTo("exit") == 0 || dirOrFile.compareTo("Exit") == 0 || dirOrFile.compareTo("EXIT") == 0)
                     break;
                 File userFile = new File(dirOrFile);
-                /*if (getFileExtension(userFile).compareTo("md") != 0 && getFileExtension(userFile).compareTo("") != 0) {
+                if (getFileExtension(userFile).compareTo("md") != 0 && getFileExtension(userFile).compareTo("") != 0) {
                     System.out.println("Incorrect input");
-                }*/
+                }
                 if (getFileExtension(userFile).compareTo("md") == 0) {
                     ReadMDFile(dirOrFile);
                     for (int i = numberString + 1; i < workFile.size(); i++)
@@ -33,8 +33,7 @@ public class Main {
                     SaveMDFile(dirOrFile);
                     System.out.println("Changed Alts: " + countCreatAlt);
                 }
-               // if (getFileExtension(userFile).compareTo("") == 0) {
-                else{
+                if (getFileExtension(userFile).compareTo("") == 0) {
                     processFilesFromFolder(userFile);
                     System.out.println("Changed Alts: " + countCreatAlt);
                 }
@@ -44,7 +43,7 @@ public class Main {
             }
         }
     }
-    
+
     static void processFilesFromFolder(File folder) throws IOException{
         File[] folderEntries = folder.listFiles();
         for (File entry : folderEntries)
@@ -54,7 +53,7 @@ public class Main {
                 processFilesFromFolder(entry);
                 continue;
             }
- 
+
             if (getFileExtension(entry).compareTo("md") == 0) {
                 System.out.println(entry.getPath());
                 ReadMDFile(entry.getPath());
@@ -67,14 +66,14 @@ public class Main {
         }
     }
 
-private static String getFileExtension(File file) {
-    String fileName = file.getName();
-    // если в имени файла есть точка и она не является первым символом в названии файла
-    if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
-    // то вырезаем все знаки после последней точки в названии файла, то есть ХХХХХ.txt -> txt
-    return fileName.substring(fileName.lastIndexOf(".")+1);
-    // в противном случае возвращаем заглушку, то есть расширение не найдено
-    else return "";
+    private static String getFileExtension(File file) {
+        String fileName = file.getName();
+        // если в имени файла есть точка и она не является первым символом в названии файла
+        if(fileName.lastIndexOf(".") != -1 && fileName.lastIndexOf(".") != 0)
+            // то вырезаем все знаки после последней точки в названии файла, то есть ХХХХХ.txt -> txt
+            return fileName.substring(fileName.lastIndexOf(".")+1);
+            // в противном случае возвращаем заглушку, то есть расширение не найдено
+        else return "";
     }
 
     static void ReplaceStringInList(){
@@ -85,7 +84,7 @@ private static String getFileExtension(File file) {
             workFile.set(numberString, tempStr);
         }
     }
-    
+
     static void ReadMDFile(String fileName)throws IOException {
         workFile = new ArrayList<>(Files.readAllLines(Paths.get(fileName)));
     }
@@ -96,6 +95,7 @@ private static String getFileExtension(File file) {
         for (int i = numberString + 1; i < workFile.size(); i++){
             currentStr = workFile.get(i);
             if (CheckStr(currentStr)){
+                countCreatAlt ++;
                 numberString = i;
                 strImg = currentStr;
                 System.out.println(strImg);
@@ -115,7 +115,7 @@ private static String getFileExtension(File file) {
         Pattern p = Pattern.compile("\\s*\\!\\[(.+)\\](.+)");
         Matcher m = p.matcher(tegStr);
         if (m.matches()) {
-            System.out.println(m.group(1));
+            //System.out.println(m.group(1));
         } else {
             System.out.println("Error with first matcher");
         }
@@ -131,7 +131,7 @@ private static String getFileExtension(File file) {
             wordImg = wordImg.replace('-', ' ');
             wordImg = wordImg.replace('_', ' ');
             wordImg = wordImg.substring(0, 1).toUpperCase() + wordImg.substring(1);
-            System.out.println(wordImg);
+            //System.out.println(wordImg);
         } else {
             System.out.println("Error with second matcher");
         }
