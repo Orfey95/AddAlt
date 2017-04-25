@@ -23,9 +23,9 @@ public class Main {
                 if (dirOrFile.compareTo("exit") == 0 || dirOrFile.compareTo("Exit") == 0 || dirOrFile.compareTo("EXIT") == 0)
                     break;
                 File userFile = new File(dirOrFile);
-                if (getFileExtension(userFile).compareTo("md") != 0 && getFileExtension(userFile).compareTo("") != 0) {
+                /*if (getFileExtension(userFile).compareTo("md") != 0 && getFileExtension(userFile).compareTo("") != 0) {
                     System.out.println("Incorrect input");
-                }
+                }*/
                 if (getFileExtension(userFile).compareTo("md") == 0) {
                     ReadMDFile(dirOrFile);
                     for (int i = numberString + 1; i < workFile.size(); i++)
@@ -33,7 +33,8 @@ public class Main {
                     SaveMDFile(dirOrFile);
                     System.out.println("Changed Alts: " + countCreatAlt);
                 }
-                if (getFileExtension(userFile).compareTo("") == 0) {
+               // if (getFileExtension(userFile).compareTo("") == 0) {
+                else{
                     processFilesFromFolder(userFile);
                     System.out.println("Changed Alts: " + countCreatAlt);
                 }
